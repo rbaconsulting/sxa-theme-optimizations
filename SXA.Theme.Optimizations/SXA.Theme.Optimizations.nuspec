@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+	<metadata>
+		<id>SXA.Theme.Optimizations</id>
+		<version>#{Build.SourceBranchName}#</version>
+		<title>SXA Theme Optimizations</title>
+		<authors>#{Authors}#</authors>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license type="expression">MIT</license>
+		<description>Optimizations for Sitecore's SXA main layout, specifically the way the javascript and css is loaded.</description>
+		<copyright>SXA Theme Optimizations</copyright>
+		<readme>content\sitecore modules\Web\SXAThemeOptimizations\README.md</readme>
+		<tags>Sitecore SXA Theming Optimizations</tags>
+	</metadata>
+	<files>
+		<file src=".\SXA.Theme.Optimizations.targets" target="buildTransitive\SXA.Theme.Optimizations.targets" />
+	</files>
+</package>

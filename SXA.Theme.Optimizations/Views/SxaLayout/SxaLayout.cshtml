@@ -1,0 +1,52 @@
+﻿@using System.Web.Mvc.Html
+@using Sitecore.Mvc
+@using Sitecore.XA.Foundation.MarkupDecorator.Extensions
+@using Sitecore.XA.Foundation.SitecoreExtensions.Extensions
+@using Sitecore.XA.Foundation.Grid.Extensions
+@using Sitecore.XA.Foundation.Theming
+@using Sitecore.XA.Foundation.Theming.Bundler
+@using Sitecore.XA.Foundation.Theming.Configuration
+@using SXA.Theme.Optimizations.Extensions
+@model Sitecore.Mvc.Presentation.RenderingModel
+@{
+	var assetConfiguration = AssetConfigurationReader.Read();
+	var assetLinks = AssetLinksGenerator.GenerateLinks(new ThemesProvider());
+}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="@Model.Item.Language.Name">
+<!--<![endif]-->
+<head>
+	@if (assetConfiguration.RequestAssetsOptimizationDisabled || Sitecore.Context.PageMode.IsExperienceEditor)
+	{
+		foreach (string script in assetLinks.Scripts)
+		{
+			@Html.Raw(script)
+		}
+	}
+	else
+	{
+		<script async src="@ThemeExtensions.GetNewlyOptimizedScript()"></script>
+	}
+
+	@foreach (string style in assetLinks.Styles)
+	{
+		@Html.Raw(style.Replace("rel=\"stylesheet\"", "rel=\"preload\" as=\"style\""))
+		@Html.Raw(style)
+	}
+
+	@Html.Sxa().VisitorIdentification()
+	@Html.Sxa().Placeholder("head")
+</head>
+    <body @Html.Sxa().Body().Decorate()>
+        @Html.Sitecore().Placeholder("body-top")
+
+        @Html.Sxa().GridBody()
+
+        @Html.Sitecore().Placeholder("body-bottom")
+    </body>
+</html>

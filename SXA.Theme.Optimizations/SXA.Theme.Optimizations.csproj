@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net48</TargetFramework>
+		<RootNamespace>SXA.Theme.Optimizations</RootNamespace>
+		<AssemblyName>SXA.Theme.Optimizations</AssemblyName>
+		<Configurations>Debug;Release;</Configurations>
+	</PropertyGroup>
+	<ItemGroup>
+		<Content Include="App_Config\Modules\SXA.Theme.Optimizations\SXA.Theme.Optimizations.config" />
+		<Content Include="sitecore modules\Web\SXAThemeOptimizations\README.md" />
+		<Content Include="Views\SxaLayout\SxaLayout.cshtml" />
+		<Content Include="Views\SxaLayout\SxaLayout.cshtml.original" />
+
+		<None Include="SXA.Theme.Optimizations.nuspec" />
+		<None Include="SXA.Theme.Optimizations.targets">
+			<Pack>true</Pack>
+			<PackagePath>buildTransitive</PackagePath>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Sitecore.Mvc" Version="9.3.0" />
+		<PackageReference Include="Sitecore.XA.Foundation.Theming" Version="9.3.0" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\SXA.Theme.Optimizations.Core\SXA.Theme.Optimizations.Core.csproj" />
+	</ItemGroup>
+</Project>
