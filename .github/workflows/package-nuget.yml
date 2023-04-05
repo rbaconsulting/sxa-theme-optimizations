@@ -18,7 +18,9 @@ jobs:
       uses: NuGet/setup-nuget@v1.0.5
 
     - name: Set env release variable
-      run: echo "Release_Version=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      run: |
+       chcp 65001 #set code page to utf-8
+       echo ("Release_Version=" + $env:GITHUB_REF.replace('refs/heads/', '')) >> $env:GITHUB_ENV
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
