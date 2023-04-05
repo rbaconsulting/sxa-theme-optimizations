@@ -20,7 +20,7 @@ jobs:
     - name: Set env release variable
       run: |
        chcp 65001 #set code page to utf-8
-       echo ("Release_Version=" + $env:GITHUB_REF.replace('refs/heads/', '')) >> $env:GITHUB_ENV
+       echo ("Release_Version=" + $env:GITHUB_REF.replace('refs/tags/', '')) >> $env:GITHUB_ENV
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
