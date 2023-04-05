@@ -1,0 +1,37 @@
+name: Package SXA Theme Optimizations
+on:
+  push:
+    tags:
+    - '[0-9]+.[0-9]+.[0-9]+(-rc(.[0-9]+)?)?'
+jobs:
+  build:
+    env:
+      Output_Folder: './output'
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+
+    - name: Set env release variable
+      run: echo "Release_Version=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 5.0.x
+
+    - name: Pack Nuget Package
+      run: dotnet pack SXA.Theme.Optimizations/SXA.Theme.Optimizations.csproj -c Release -o ${{ env.Output_Folder }} /p:Version=${{ env.Release_Version }}
+
+    - name: Upload nuget to artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: SXA.Theme.Optimizations-${{ env.Release_Version }} Nuget Package
+        path: ${{ env.Output_Folder }}/SXA.Theme.Optimizations.${{ env.Release_Version }}.nupkg
+
+    - name: Publish to nuget.org
+      run: dotnet nuget push ${{ env.Output_Folder }}/SXA.Theme.Optimizations.${{ env.Release_Version }}.nupkg --api-key ${{ secrets.NUGET_API_KEY }} -s 'https://api.nuget.org/v3/index.json'

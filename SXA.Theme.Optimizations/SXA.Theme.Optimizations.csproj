@@ -4,14 +4,29 @@
 		<RootNamespace>SXA.Theme.Optimizations</RootNamespace>
 		<AssemblyName>SXA.Theme.Optimizations</AssemblyName>
 		<Configurations>Debug;Release;</Configurations>
+		
+		
+		<RepositoryUrl>https://github.com/rbaconsulting/SXA-Theme-Optimizations</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<Company>RBA Inc.</Company>
+		<Authors>Austin Gilbert</Authors>
+		<PackageProjectUrl>https://github.com/rbaconsulting/SXA-Theme-Optimizations/wiki</PackageProjectUrl>
+		<PackageTags>Sitecore;SXA;Optimization;</PackageTags>
+		<PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
+		<Description>A small plugin that further optimizes the JavaScript and CSS used by SXA.</Description>
+		<NeutralLanguage>en</NeutralLanguage>
+		<PackageReleaseNotes>Please visit our github releases page for the release notes. https://github.com/rbaconsulting/SXA-Theme-Optimizations/releases</PackageReleaseNotes>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 	<ItemGroup>
 		<Content Include="App_Config\Modules\SXA.Theme.Optimizations\SXA.Theme.Optimizations.config" />
 		<Content Include="sitecore modules\Web\SXAThemeOptimizations\README.md" />
 		<Content Include="Views\SxaLayout\SxaLayout.cshtml" />
 		<Content Include="Views\SxaLayout\SxaLayout.cshtml.original" />
-
-		<None Include="SXA.Theme.Optimizations.nuspec" />
+		<None Include="..\README.md">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
 		<None Include="SXA.Theme.Optimizations.targets">
 			<Pack>true</Pack>
 			<PackagePath>buildTransitive</PackagePath>
