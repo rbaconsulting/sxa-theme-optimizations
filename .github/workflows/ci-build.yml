@@ -1,4 +1,4 @@
-name: CI Build
+name: SXA Theme Optimizations CI Build
 on:
   push:
     branches: [ main ]

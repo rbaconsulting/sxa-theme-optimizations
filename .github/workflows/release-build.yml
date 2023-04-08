@@ -1,4 +1,4 @@
-name: Package SXA Theme Optimizations
+name: SXA Theme Optimizations Release Build
 on:
   push:
     tags:
@@ -30,11 +30,16 @@ jobs:
     - name: Pack Nuget Package
       run: dotnet pack SXA.Theme.Optimizations/SXA.Theme.Optimizations.csproj -c Release -o ${{ env.Output_Folder }} /p:Version=${{ env.Release_Version }}
 
-    - name: Upload nuget to artifact
-      uses: actions/upload-artifact@v2
+    - name: Upload Sitecore Package to Release
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: SXA.Theme.Optimizations-${{ env.Release_Version }} Nuget Package
-        path: ${{ env.Output_Folder }}/SXA.Theme.Optimizations.${{ env.Release_Version }}.nupkg
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: Sitecore-Packages/SXA.Theme.Optimizations-${{ env.Release_Version }}.zip
+        asset_name: SXA.Theme.Optimizations-${{ env.Release_Version }}.zip
+        asset_content_type: application/zip
 
     - name: Publish to nuget.org
       run: dotnet nuget push ${{ env.Output_Folder }}/SXA.Theme.Optimizations.${{ env.Release_Version }}.nupkg --api-key ${{ secrets.NUGET_API_KEY }} -s 'https://api.nuget.org/v3/index.json'
