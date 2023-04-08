@@ -25,7 +25,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 7.x
 
     - name: Pack Nuget Package
       run: dotnet pack SXA.Theme.Optimizations/SXA.Theme.Optimizations.csproj -c Release -o ${{ env.Output_Folder }} /p:Version=${{ env.Release_Version }}
