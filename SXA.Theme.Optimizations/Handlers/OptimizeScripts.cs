@@ -2,8 +2,8 @@
 using Sitecore.Data.Items;
 using Sitecore.DependencyInjection;
 using Sitecore.Events;
-using SXA.Theme.Optimizations.Core.Constants;
-using SXA.Theme.Optimizations.Core.Interfaces;
+using SXA.Theme.Optimizations.Constants;
+using SXA.Theme.Optimizations.Interfaces;
 using System;
 
 namespace SXA.Theme.Optimizations.Handlers

@@ -1,7 +1,7 @@
 ﻿using Sitecore.Data;
 using Sitecore.Data.Items;
 
-namespace SXA.Theme.Optimizations.Core.Interfaces
+namespace SXA.Theme.Optimizations.Interfaces
 {
 	/// <summary>
 	/// Interface for optimizing SXA themes by bundling all required scripts into one minified file.

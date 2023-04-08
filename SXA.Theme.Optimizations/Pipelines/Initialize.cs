@@ -1,7 +1,7 @@
 ﻿using Sitecore.Diagnostics;
 using Sitecore.Events;
 using Sitecore.Pipelines;
-using SXA.Theme.Optimizations.Core.Constants;
+using SXA.Theme.Optimizations.Constants;
 using System;
 
 namespace SXA.Theme.Optimizations.Pipelines

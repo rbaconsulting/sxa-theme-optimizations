@@ -2,7 +2,7 @@
 using Sitecore.Events;
 using Sitecore.Shell.Framework.Commands;
 using Sitecore.Web.UI.Sheer;
-using SXA.Theme.Optimizations.Core.Constants;
+using SXA.Theme.Optimizations.Constants;
 
 namespace SXA.Theme.Optimizations.Commands
 {

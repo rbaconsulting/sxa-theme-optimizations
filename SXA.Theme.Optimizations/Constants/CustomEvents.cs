@@ -1,4 +1,4 @@
-﻿namespace SXA.Theme.Optimizations.Core.Constants
+﻿namespace SXA.Theme.Optimizations.Constants
 {
     public struct CustomEvents
     {

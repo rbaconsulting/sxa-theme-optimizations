@@ -40,7 +40,4 @@
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\SXA.Theme.Optimizations.Core\SXA.Theme.Optimizations.Core.csproj" />
-	</ItemGroup>
 </Project>

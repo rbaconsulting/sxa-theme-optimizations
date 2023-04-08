@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Sitecore.DependencyInjection;
-using SXA.Theme.Optimizations.Core.Interfaces;
-using SXA.Theme.Optimizations.Core.Services;
+using SXA.Theme.Optimizations.Interfaces;
+using SXA.Theme.Optimizations.Services;
 
 namespace SXA.Theme.Optimizations.App_Start
 {
