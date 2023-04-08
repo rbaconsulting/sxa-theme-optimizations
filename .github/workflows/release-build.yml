@@ -23,7 +23,6 @@ jobs:
        echo ("Release_Version=" + $env:GITHUB_REF.replace('refs/tags/', '')) >> $env:GITHUB_ENV
 
     - name: Upload Sitecore Package to Release
-      id: upload-release-asset 
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,7 +41,6 @@ jobs:
       run: dotnet pack SXA.Theme.Optimizations/SXA.Theme.Optimizations.csproj -c Release -o ${{ env.Output_Folder }} /p:Version=${{ env.Release_Version }}
 
     - name: Upload NuGet Package to Release
-      id: upload-release-asset 
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
