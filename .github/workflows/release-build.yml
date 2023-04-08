@@ -34,7 +34,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.get_release.outputs.upload_url }}
-        asset_path: Sitecore-Packages/SXA.Theme.Optimizations-${{ env.Release_Version }}.zip
+        asset_path: "Sitecore Packages/SXA.Theme.Optimizations-${{ env.Release_Version }}.zip"
         asset_name: SXA.Theme.Optimizations-${{ env.Release_Version }}.zip
         asset_content_type: application/zip
 
