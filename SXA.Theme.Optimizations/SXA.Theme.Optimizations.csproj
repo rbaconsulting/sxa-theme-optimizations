@@ -4,18 +4,16 @@
 		<RootNamespace>SXA.Theme.Optimizations</RootNamespace>
 		<AssemblyName>SXA.Theme.Optimizations</AssemblyName>
 		<Configurations>Debug;Release;</Configurations>
-		
-		
 		<RepositoryUrl>https://github.com/rbaconsulting/SXA-Theme-Optimizations</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<Company>RBA Inc.</Company>
 		<Authors>Austin Gilbert</Authors>
 		<PackageProjectUrl>https://github.com/rbaconsulting/SXA-Theme-Optimizations/wiki</PackageProjectUrl>
-		<PackageTags>Sitecore;SXA;Optimization;</PackageTags>
-		<PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
+		<PackageTags>Sitecore;SXA;Themes;Optimization;Performance;</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Description>A small plugin that further optimizes the JavaScript and CSS used by SXA.</Description>
 		<NeutralLanguage>en</NeutralLanguage>
-		<PackageReleaseNotes>Please visit our github releases page for the release notes. https://github.com/rbaconsulting/SXA-Theme-Optimizations/releases</PackageReleaseNotes>
+		<PackageReleaseNotes>Please visit our github releases page for release notes. https://github.com/rbaconsulting/SXA-Theme-Optimizations/releases</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 	<ItemGroup>
