@@ -2,9 +2,9 @@
 using Sitecore.Eventing;
 using Sitecore.Events;
 using Sitecore.Pipelines;
-using SXA.Theme.Optimizations.Core.Constants;
-using SXA.Theme.Optimizations.Core.Events;
-using SXA.Theme.Optimizations.Core.Events.Args;
+using SXA.Theme.Optimizations.Constants;
+using SXA.Theme.Optimizations.Events;
+using SXA.Theme.Optimizations.Events.Args;
 using System;
 
 namespace SXA.Theme.Optimizations.Pipelines

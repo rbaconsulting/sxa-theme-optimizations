@@ -1,7 +1,7 @@
 ﻿using Sitecore.Events;
 using System;
 
-namespace SXA.Theme.Optimizations.Core.Events.Args
+namespace SXA.Theme.Optimizations.Events.Args
 {
     /// <summary>
     /// A placeholder class for event arguments if needed...

@@ -1,5 +1,5 @@
-﻿using SXA.Theme.Optimizations.Core.Constants;
-using SXA.Theme.Optimizations.Core.Interfaces;
+﻿using SXA.Theme.Optimizations.Constants;
+using SXA.Theme.Optimizations.Interfaces;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using System;
@@ -10,7 +10,7 @@ using System.Web;
 using Sitecore.Data;
 using System.Collections.Generic;
 
-namespace SXA.Theme.Optimizations.Core.Services
+namespace SXA.Theme.Optimizations.Services
 {
 	public class ScriptOptimizer : IScriptOptimizer
 	{

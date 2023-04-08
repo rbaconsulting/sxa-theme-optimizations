@@ -1,6 +1,6 @@
 ﻿using Sitecore.DependencyInjection;
 using Sitecore.XA.Foundation.Theming;
-using SXA.Theme.Optimizations.Core.Constants;
+using SXA.Theme.Optimizations.Constants;
 
 namespace SXA.Theme.Optimizations.Extensions
 {
