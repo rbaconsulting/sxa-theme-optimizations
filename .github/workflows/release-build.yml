@@ -22,12 +22,18 @@ jobs:
        chcp 65001 #set code page to utf-8
        echo ("Release_Version=" + $env:GITHUB_REF.replace('refs/tags/', '')) >> $env:GITHUB_ENV
 
+    - name: Get release
+      id: get_release
+      uses: bruceadams/get-release@v1.3.2
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
     - name: Upload Sitecore Package to Release
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ github.event.release.upload_url }}
+        upload_url: ${{ steps.get_release.outputs.upload_url }}
         asset_path: Sitecore-Packages/SXA.Theme.Optimizations-${{ env.Release_Version }}.zip
         asset_name: SXA.Theme.Optimizations-${{ env.Release_Version }}.zip
         asset_content_type: application/zip
@@ -45,7 +51,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ github.event.release.upload_url }}
+        upload_url: ${{ steps.get_release.outputs.upload_url }}
         asset_path: ${{ env.Output_Folder }}/SXA.Theme.Optimizations.${{ env.Release_Version }}.nupkg
         asset_name: SXA.Theme.Optimizations.${{ env.Release_Version }}.nupkg
         asset_content_type: application/zip
