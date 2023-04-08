@@ -1,4 +1,4 @@
-name: SXA Theme Optimizations Release Build
+name: Release Build
 on:
   push:
     tags:
