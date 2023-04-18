@@ -13,7 +13,12 @@ namespace SXA.Theme.Optimizations.Handlers
     /// </summary>
     public class OptimizeScripts
     {
-        public void OnSaving(object sender, EventArgs args)
+		/// <summary>
+		/// Fires on the CM or Standalone server whenever a theme related item is saved.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		public void OnSaving(object sender, EventArgs args)
         {
             var savedItem = Event.ExtractParameter(args, 0) as Item;
 

@@ -9,6 +9,9 @@ using System;
 
 namespace SXA.Theme.Optimizations.Pipelines
 {
+    /// <summary>
+    /// A pipeline that runs on the CD servers during startup that subscribes the server to the custom remote event.
+    /// </summary>
     public class SubscribeRemoteEvent
     {
         public void Process(PipelineArgs args)
