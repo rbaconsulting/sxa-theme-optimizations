@@ -2,6 +2,9 @@
 
 namespace SXA.Theme.Optimizations
 {
+	/// <summary>
+	/// Template and field IDs to avoid hardcoded, non-reusable strings.
+	/// </summary>
 	public struct Templates
 	{
 		public struct Settings
