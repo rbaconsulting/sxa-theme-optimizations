@@ -26,13 +26,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\release-build.yml = .github\workflows\release-build.yml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sitecore Packages", "Sitecore Packages", "{281A91B6-6FB4-4010-A21F-6E25DB5FC7B3}"
-	ProjectSection(SolutionItems) = preProject
-		Sitecore Packages\SXA.Theme.Optimizations-9.3.0-rc.1.zip = Sitecore Packages\SXA.Theme.Optimizations-9.3.0-rc.1.zip
-		Sitecore Packages\SXA.Theme.Optimizations-9.3.0-rc.2.zip = Sitecore Packages\SXA.Theme.Optimizations-9.3.0-rc.2.zip
-		Sitecore Packages\SXA.Theme.Optimizations-9.3.0-rc.3.zip = Sitecore Packages\SXA.Theme.Optimizations-9.3.0-rc.3.zip
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEMPLATE", "{A92F1C9D-383E-4BAC-8D75-F56A7221047F}"
 	ProjectSection(SolutionItems) = preProject
 		.github\ISSUE_TEMPLATE\bug_report.md = .github\ISSUE_TEMPLATE\bug_report.md
@@ -56,7 +49,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E9D063AD-BEE8-4094-9731-C25E6241EE16} = {B76ADCC2-F8C1-4EE8-AF71-E33E8EEBF748}
 		{BF0C6224-2CEC-469C-8E3E-83467A13BDD8} = {E9D063AD-BEE8-4094-9731-C25E6241EE16}
-		{281A91B6-6FB4-4010-A21F-6E25DB5FC7B3} = {B76ADCC2-F8C1-4EE8-AF71-E33E8EEBF748}
 		{A92F1C9D-383E-4BAC-8D75-F56A7221047F} = {E9D063AD-BEE8-4094-9731-C25E6241EE16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
