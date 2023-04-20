@@ -10,13 +10,12 @@
 # supported CodeQL languages.
 #
 name: "CodeQL"
-
 on:
   push:
-    branches: [ "main", hotfixes/**, refs/tags/** ]
+    branches: [ "main", v*, refs/tags/** ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches:  [ "main", hotfixes/** ]
+    branches: [ "main", v*, refs/tags/** ]
   schedule:
     - cron: '18 10 * * 6'
 
