@@ -74,12 +74,24 @@ namespace SXA.Theme.Optimizations.Services
                         }
                     }
 
-                    if (!string.IsNullOrWhiteSpace(newlyOptimizedMin))
+                    var themeName = targetThemeItem.Name?.ToLower() ?? string.Empty;
+                    var targetDatabaseName = targetThemeItem.Database?.Name?.ToLower() ?? string.Empty;
+
+					if (!string.IsNullOrWhiteSpace(newlyOptimizedMin) && !string.IsNullOrWhiteSpace(themeName) && !string.IsNullOrWhiteSpace(targetDatabaseName))
                     {
-                        var filename = $"{HttpRuntime.AppDomainAppPath}{string.Format(FileNames.NewlyOptimizedMin.TrimStart('/').Replace("/", "\\"), targetThemeItem.Name.Replace(" ", "-").ToLower(), targetThemeItem.Database.Name.ToLower())}";
+                        var filename = $"{HttpRuntime.AppDomainAppPath}{string.Format(FileNames.NewlyOptimizedMin.TrimStart('/').Replace("/", "\\"), themeName.Replace(" ", "-"), targetDatabaseName)}";
                         File.WriteAllText(filename, newlyOptimizedMin);
-                    }
+						Log.Warn(string.Format(LogMessages.Warn.ScriptOptimization, targetThemeItem.Name), this);
+					}
+                    else
+                    {
+						Log.Error(string.Format(LogMessages.Error.ScriptOptimizationEmptyValue, themeName, targetDatabaseName), this);
+					}
                 }
+                else
+                {
+					Log.Warn(LogMessages.Warn.NullThemeItem, this);
+				}
 			}
 			catch (Exception e)
 			{
