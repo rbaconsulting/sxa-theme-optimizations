@@ -1,4 +1,5 @@
-﻿using Sitecore.Diagnostics;
+﻿using Sitecore.Configuration;
+using Sitecore.Diagnostics;
 using Sitecore.Events;
 using Sitecore.Pipelines;
 using SXA.Theme.Optimizations.Constants;
@@ -15,7 +16,12 @@ namespace SXA.Theme.Optimizations.Pipelines
 		{
 			try
 			{
-                Event.RaiseEvent(CustomEvents.OptimizeScripts);
+				var generateOnStartup = Settings.GetBoolSetting(SitecoreSettings.GenerateScriptsOnStartup, false);
+
+				if(generateOnStartup)
+				{
+					Event.RaiseEvent(CustomEvents.OptimizeScripts);
+				}
             }
             catch (Exception e)
 			{
