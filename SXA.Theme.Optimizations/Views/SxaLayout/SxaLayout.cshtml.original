@@ -4,11 +4,16 @@
 @using Sitecore.XA.Foundation.SitecoreExtensions.Extensions
 @using Sitecore.XA.Foundation.Grid.Extensions
 @using Sitecore.XA.Foundation.Theming.Bundler
+@using Sitecore.XA.Foundation.Theming.Models
+@using Sitecore.XA.Foundation.Theming.Services
+@using Microsoft.Extensions.DependencyInjection
+@using Sitecore.DependencyInjection
 
 @model Sitecore.Mvc.Presentation.RenderingModel
 
 @{
     AssetLinks assetLinks = AssetLinksGenerator.GenerateLinks(new ThemesProvider());
+    HTMLIncludes includes = ServiceLocator.ServiceProvider.GetService<IHTMLIncludesService>().GetHTMLIncludes();
 }
 
 <!DOCTYPE html>
@@ -23,16 +28,30 @@
     {
         @Html.Raw(style)
     }
+
+    @foreach (var include in includes.Head)
+    {
+        @Html.Raw(include.HTML)
+    }
+
     @Html.Sxa().VisitorIdentification()
     @Html.Sxa().Placeholder("head")
 </head>
 <body @Html.Sxa().Body().Decorate()>
     @Html.Sitecore().Placeholder("body-top")
+    @foreach (var include in includes.BodyTop)
+    {
+        @Html.Raw(include.HTML)
+    }
     @Html.Sxa().GridBody()
     @Html.Sitecore().Placeholder("body-bottom")
-    @foreach (string script in assetLinks.Scripts)
+    @foreach (var include in includes.BodyBottom)
     {
-        @Html.Raw(script)
+        @Html.Raw(include.HTML)
+    }
+    @foreach (string include in assetLinks.Scripts)
+    {
+        @Html.Raw(include)
     }
     <!-- /#wrapper -->
 </body>
