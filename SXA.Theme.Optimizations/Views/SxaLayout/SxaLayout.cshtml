@@ -4,13 +4,18 @@
 @using Sitecore.XA.Foundation.SitecoreExtensions.Extensions
 @using Sitecore.XA.Foundation.Grid.Extensions
 @using Sitecore.XA.Foundation.Theming
+@using Sitecore.XA.Foundation.Theming.Services
 @using Sitecore.XA.Foundation.Theming.Bundler
 @using Sitecore.XA.Foundation.Theming.Configuration
+@using Sitecore.XA.Foundation.Theming.Models
+@using Microsoft.Extensions.DependencyInjection
+@using Sitecore.DependencyInjection
 @using SXA.Theme.Optimizations.Extensions
 @model Sitecore.Mvc.Presentation.RenderingModel
 @{
-	var assetConfiguration = AssetConfigurationReader.Read();
-	var assetLinks = AssetLinksGenerator.GenerateLinks(new ThemesProvider());
+    var assetConfiguration = AssetConfigurationReader.Read();
+    var assetLinks = AssetLinksGenerator.GenerateLinks(new ThemesProvider());
+    var includes = ServiceLocator.ServiceProvider.GetService<IHTMLIncludesService>().GetHTMLIncludes();
 }
 
 <!DOCTYPE html>
@@ -21,32 +26,47 @@
 <html class="no-js" lang="@Model.Item.Language.Name">
 <!--<![endif]-->
 <head>
-	@if (assetConfiguration.RequestAssetsOptimizationDisabled || Sitecore.Context.PageMode.IsExperienceEditor)
-	{
-		foreach (string script in assetLinks.Scripts)
-		{
-			@Html.Raw(script)
-		}
-	}
-	else
-	{
-		<script async src="@ThemeExtensions.GetSXAThemeOptimizationsScript()"></script>
-	}
+    @if (assetConfiguration.RequestAssetsOptimizationDisabled || Sitecore.Context.PageMode.IsExperienceEditor)
+    {
+        foreach (string script in assetLinks.Scripts)
+        {
+            @Html.Raw(script)
+        }
+    }
+    else
+    {
+        <script async src="@ThemeExtensions.GetSXAThemeOptimizationsScript()"></script>
+    }
 
-	@foreach (string style in assetLinks.Styles)
-	{
-		@Html.Raw(style.Replace("rel=\"stylesheet\"", "rel=\"preload\" as=\"style\""))
-		@Html.Raw(style)
-	}
+    @foreach (string style in assetLinks.Styles)
+    {
+        @Html.Raw(style.Replace("rel=\"stylesheet\"", "rel=\"preload\" as=\"style\""))
+        @Html.Raw(style)
+    }
 
-	@Html.Sxa().VisitorIdentification()
-	@Html.Sxa().Placeholder("head")
+    @foreach (var include in includes.Head)
+    {
+        @Html.Raw(include.HTML)
+    }
+
+    @Html.Sxa().VisitorIdentification()
+    @Html.Sxa().Placeholder("head")
 </head>
-    <body @Html.Sxa().Body().Decorate()>
-        @Html.Sitecore().Placeholder("body-top")
+<body @Html.Sxa().Body().Decorate()>
+    @Html.Sitecore().Placeholder("body-top")
 
-        @Html.Sxa().GridBody()
+    @foreach (var include in includes.BodyTop)
+    {
+        @Html.Raw(include.HTML)
+    }
 
-        @Html.Sitecore().Placeholder("body-bottom")
-    </body>
+    @Html.Sxa().GridBody()
+
+    @Html.Sitecore().Placeholder("body-bottom")
+
+    @foreach (var include in includes.BodyBottom)
+    {
+        @Html.Raw(include.HTML)
+    }
+</body>
 </html>
