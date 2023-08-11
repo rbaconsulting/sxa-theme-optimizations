@@ -17,7 +17,7 @@ namespace SXA.Theme.Optimizations.Extensions
             var themingContext = ServiceLocator.ServiceProvider.GetService<IThemingContext>();
             var scriptUrl = string.Format(FileNames.NewlyOptimizedMin, themingContext?.ThemeItem?.Name.Replace(" ", "-").ToLower(), themingContext?.ThemeItem?.Database?.Name.ToLower());
 
-            return Settings.GetBoolSetting("Media.AlwaysIncludeServerUrl", false) ? Settings.GetSetting("Media.MediaLinkServerUrl", string.Empty) + scriptUrl : scriptUrl;
+            return Settings.GetBoolSetting(SitecoreSettings.AlwaysIncludeServerUrl, false) ? Settings.GetSetting(SitecoreSettings.MediaLinkServerUrl, string.Empty) + scriptUrl : scriptUrl;
         }
     }
 }
