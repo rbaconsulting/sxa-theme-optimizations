@@ -2,6 +2,7 @@
 {
 	public struct SitecoreSettings
 	{
-		public const string GenerateScriptsOnStartup = "SXA.Theme.Optimizations.GenerateScriptsOnStartup";
+		public const string AddSecurityHeaders = "SXA.Theme.Optimizations.AddSecurityHeaders";
+        public const string GenerateScriptsOnStartup = "SXA.Theme.Optimizations.GenerateScriptsOnStartup";
 	}
 }
