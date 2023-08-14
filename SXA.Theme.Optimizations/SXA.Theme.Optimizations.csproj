@@ -15,6 +15,7 @@
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageReleaseNotes>Please visit our github releases page for release notes. https://github.com/rbaconsulting/SXA-Theme-Optimizations/releases</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	</PropertyGroup>
 	<ItemGroup>
 		<Content Include="App_Config\Modules\SXA.Theme.Optimizations\SXA.Theme.Optimizations.config" />
