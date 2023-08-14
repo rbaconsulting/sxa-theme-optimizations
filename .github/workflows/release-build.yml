@@ -33,6 +33,9 @@ jobs:
       with:
         dotnet-version: 7.x
 
+    - name: Build
+      run: dotnet build SXA.Theme.Optimizations/SXA.Theme.Optimizations.csproj -c Release
+
     - name: Pack Nuget Package
       run: dotnet pack SXA.Theme.Optimizations/SXA.Theme.Optimizations.csproj -c Release -o ${{ env.Output_Folder }} /p:Version=${{ env.Release_Version }}
 
