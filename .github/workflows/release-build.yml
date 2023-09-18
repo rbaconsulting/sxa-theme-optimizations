@@ -2,7 +2,7 @@ name: Release Build
 on:
   push:
     tags:
-    - '[0-9]+.[0-9]+.[0-9]+'
+    - '[0-9]+.[0-9]+.[0-9]+.[0-9]+'
     - '[0-9]+.[0-9]+.[0-9]+-rc.[0-9]+'
 jobs:
   build:
@@ -28,20 +28,13 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Upload Sitecore Package to Release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.get_release.outputs.upload_url }}
-        asset_path: "Sitecore Packages/SXA.Theme.Optimizations-${{ env.Release_Version }}.zip"
-        asset_name: SXA.Theme.Optimizations-${{ env.Release_Version }}.zip
-        asset_content_type: application/zip
-
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 7.x
+
+    - name: Build
+      run: dotnet build SXA.Theme.Optimizations/SXA.Theme.Optimizations.csproj -c Release
 
     - name: Pack Nuget Package
       run: dotnet pack SXA.Theme.Optimizations/SXA.Theme.Optimizations.csproj -c Release -o ${{ env.Output_Folder }} /p:Version=${{ env.Release_Version }}
