@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# SXA Theme Optimizations
+**/App_Data/items/**/*.dat
+
 # Sitecore CLI
 .sitecore/
 .vscode/
