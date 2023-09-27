@@ -9,7 +9,7 @@
 		<Company>RBA Inc.</Company>
 		<Authors>Austin Gilbert</Authors>
 		<PackageProjectUrl>https://github.com/rbaconsulting/SXA-Theme-Optimizations/wiki</PackageProjectUrl>
-		<PackageTags>Sitecore;SXA;Themes;Optimization;Performance;</PackageTags>
+		<PackageTags>Sitecore;SXA;Themes;Optimization;Performance;Creative;Exchange;JavaScript;CSS;</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Description>A small plugin that further optimizes the JavaScript and CSS used by SXA.</Description>
 		<NeutralLanguage>en</NeutralLanguage>
