@@ -25,14 +25,7 @@
 <html class="no-js" lang="@Model.Item.Language.Name">
 <!--<![endif]-->
 <head>
-    @if (assetConfiguration.RequestAssetsOptimizationDisabled || Sitecore.Context.PageMode.IsExperienceEditor)
-    {
-        @foreach (string include in assetLinks.Scripts)
-        {
-            @Html.Raw(include)
-        }
-    }
-    else
+    @if (!assetConfiguration.RequestAssetsOptimizationDisabled && !Sitecore.Context.PageMode.IsExperienceEditor)
     {
         <script async src="@ThemeExtensions.GetSXAThemeOptimizationsScript()"></script>
     }
@@ -67,6 +60,15 @@
     {
         @Html.Raw(include.HTML)
     }
+
+    @if (assetConfiguration.RequestAssetsOptimizationDisabled || Sitecore.Context.PageMode.IsExperienceEditor)
+    {
+        foreach (string include in assetLinks.Scripts)
+        {
+            @Html.Raw(include)
+        }
+    }
+
     <!-- /#wrapper -->
 </body>
 </html>

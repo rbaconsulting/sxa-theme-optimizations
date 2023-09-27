@@ -3,8 +3,7 @@
 		<configFilePath>App_Config\Modules\SXA.Theme.Optimizations\SXA.Theme.Optimizations.config</configFilePath>
 		<coreDatItemsFilePath>App_Data\items\core\items.core.sxa.theme.optimizations.dat</coreDatItemsFilePath>
 		<masterDatItemsFilePath>App_Data\items\master\items.master.sxa.theme.optimizations.dat</masterDatItemsFilePath>
-		<viewFilePath>Views\SxaLayout\SxaLayout.cshtml</viewFilePath>
-		<originalViewFilePath>Views\SxaLayout\SxaLayout.cshtml.original</originalViewFilePath>
+		<viewFilePath>Views\SxaLayout\Optimized SxaLayout.cshtml</viewFilePath>
 		<readmeFilePath>sitecore modules\Web\SXAThemeOptimizations\README.md</readmeFilePath>
 	</PropertyGroup>
 	<Target Name="CopyPackageAssets" BeforeTargets="BeforeBuild">
@@ -27,10 +26,6 @@
             DestinationFiles="$(MSBuildProjectDirectory)\$(viewFilePath)"
             SkipUnchangedFiles="true" />
 		<Copy
-            SourceFiles="$(MSBuildThisFileDirectory)..\content\$(originalViewFilePath)"
-            DestinationFiles="$(MSBuildProjectDirectory)\$(originalViewFilePath)"
-            SkipUnchangedFiles="true" />
-		<Copy
             SourceFiles="$(MSBuildThisFileDirectory)..\content\$(readmeFilePath)"
             DestinationFiles="$(MSBuildProjectDirectory)\$(readmeFilePath)"
             SkipUnchangedFiles="true" />
@@ -43,7 +38,6 @@
 		<Delete Files="$(MSBuildProjectDirectory)\$(coreDatItemsFilePath)" />
 		<Delete Files="$(MSBuildProjectDirectory)\$(masterDatItemsFilePath)" />
 		<Delete Files="$(MSBuildProjectDirectory)\$(viewFilePath)" />
-		<Delete Files="$(MSBuildProjectDirectory)\$(originalViewFilePath)" />
 		<Delete Files="$(MSBuildProjectDirectory)\$(readmeFilePath)" />
 	</Target>
 </Project>
