@@ -19,6 +19,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<Content Include="App_Config\Modules\SXA.Theme.Optimizations\SXA.Theme.Optimizations.config" />
+		<Content Include="App_Data\items\**" />
 		<Content Include="sitecore modules\Web\SXAThemeOptimizations\README.md" />
 		<Content Include="Views\SxaLayout\SxaLayout.cshtml" />
 		<Content Include="Views\SxaLayout\SxaLayout.cshtml.original" />

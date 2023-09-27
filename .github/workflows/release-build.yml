@@ -2,8 +2,10 @@ name: Release Build
 on:
   push:
     tags:
+    - '[0-9]+.[0-9]+.[0-9]+'
     - '[0-9]+.[0-9]+.[0-9]+.[0-9]+'
     - '[0-9]+.[0-9]+.[0-9]+-rc.[0-9]+'
+    - '[0-9]+.[0-9]+.[0-9]+.[0-9]+-rc.[0-9]+'
 jobs:
   build:
     env:
@@ -33,7 +35,19 @@ jobs:
       with:
         dotnet-version: 7.x
 
-    - name: Build
+    - name: Restore Sitecore.CLI dotnet tool
+      run: dotnet tool restore
+
+    - name: Restore Sitecore.CLI packages and files
+      run: dotnet sitecore init
+
+    - name: Generate Core database items file
+      run: dotnet sitecore itemres create -i SXA.Theme.Optimizations.Core --output SXA.Theme.Optimizations\App_Data\items\core\sxa.theme.optimizations --overwrite
+
+    - name: Generate Master database items file
+      run: dotnet sitecore itemres create -i SXA.Theme.Optimizations.Master --output SXA.Theme.Optimizations\App_Data\items\master\sxa.theme.optimizations --overwrite
+
+    - name: Build Solution
       run: dotnet build SXA.Theme.Optimizations/SXA.Theme.Optimizations.csproj -c Release
 
     - name: Pack Nuget Package

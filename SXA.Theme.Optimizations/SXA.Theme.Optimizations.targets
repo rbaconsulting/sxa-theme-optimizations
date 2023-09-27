@@ -1,56 +1,49 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
-		<configContentFilePath>$(MSBuildThisFileDirectory)..\content\App_Config\Modules\SXA.Theme.Optimizations\SXA.Theme.Optimizations.config</configContentFilePath>
-		<viewContentFilePath>$(MSBuildThisFileDirectory)..\content\Views\SxaLayout\SxaLayout.cshtml</viewContentFilePath>
-		<originalViewContentFilePath>$(MSBuildThisFileDirectory)..\content\Views\SxaLayout\SxaLayout.cshtml.original</originalViewContentFilePath>
-		<readmeFilePath>$(MSBuildThisFileDirectory)..\content\sitecore modules\Web\SXAThemeOptimizations\README.md</readmeFilePath>
+		<configFilePath>App_Config\Modules\SXA.Theme.Optimizations\SXA.Theme.Optimizations.config</configFilePath>
+		<coreDatItemsFilePath>App_Data\items\core\items.core.sxa.theme.optimizations.dat</coreDatItemsFilePath>
+		<masterDatItemsFilePath>App_Data\items\master\items.master.sxa.theme.optimizations.dat</masterDatItemsFilePath>
+		<viewFilePath>Views\SxaLayout\SxaLayout.cshtml</viewFilePath>
+		<originalViewFilePath>Views\SxaLayout\SxaLayout.cshtml.original</originalViewFilePath>
+		<readmeFilePath>sitecore modules\Web\SXAThemeOptimizations\README.md</readmeFilePath>
 	</PropertyGroup>
 	<Target Name="CopyPackageAssets" BeforeTargets="BeforeBuild">
-		<ItemGroup>
-			<PackageContentConfig Include="$(configContentFilePath)" />
-			<PackageContentView Include="$(viewContentFilePath)" />
-			<PackageContentOriginalView Include="$(originalViewContentFilePath)" />
-			<Readme Include="$(readmeFilePath)" />
-		</ItemGroup>
-		
-		<Message Text="Copying SXA.Theme.Optimizations files from package"  Importance="high" />
-		
-		<Warning Text="Config file not found for SXA.Theme.Optimizations nuget package!" Condition="@(PackageContentConfig->Count()) == 0" />
-		<Warning Text="View file not found for SXA.Theme.Optimizations nuget package!" Condition="@(PackageContentView->Count()) == 0" />
-		<Warning Text="Original view file not found for SXA.Theme.Optimizations nuget package!" Condition="@(PackageContentOriginalView->Count()) == 0" />
-		<Warning Text="Readme file not found for SXA.Theme.Optimizations nuget package!" Condition="@(Readme->Count()) == 0" />
+		<Message Text="SXA.Theme.Optimizations: Copying NuGet package files into project directory."  Importance="high" />
 
 		<Copy
-            SourceFiles="@(PackageContentConfig)"
-            DestinationFiles="@(PackageContentConfig->'$(MSBuildProjectDirectory)\App_Config\Modules\SXA.Theme.Optimizations\SXA.Theme.Optimizations.config')"
+            SourceFiles="$(MSBuildThisFileDirectory)..\content\$(configFilePath)"
+            DestinationFiles="$(MSBuildProjectDirectory)\$(configFilePath)"
             SkipUnchangedFiles="true" />
 		<Copy
-            SourceFiles="@(PackageContentView)"
-            DestinationFiles="@(PackageContentView->'$(MSBuildProjectDirectory)\Views\SxaLayout\SxaLayout.cshtml')"
+            SourceFiles="$(MSBuildThisFileDirectory)..\content\$(coreDatItemsFilePath)"
+            DestinationFiles="$(MSBuildProjectDirectory)\$(coreDatItemsFilePath)"
             SkipUnchangedFiles="true" />
 		<Copy
-            SourceFiles="@(PackageContentOriginalView)"
-            DestinationFiles="@(PackageContentOriginalView->'$(MSBuildProjectDirectory)\Views\SxaLayout\SxaLayout.cshtml.original')"
+            SourceFiles="$(MSBuildThisFileDirectory)..\content\$(masterDatItemsFilePath)"
+            DestinationFiles="$(MSBuildProjectDirectory)\$(masterDatItemsFilePath)"
             SkipUnchangedFiles="true" />
 		<Copy
-            SourceFiles="@(Readme)"
-            DestinationFiles="@(Readme->'$(MSBuildProjectDirectory)\sitecore modules\Web\SXAThemeOptimizations\README.md')"
+            SourceFiles="$(MSBuildThisFileDirectory)..\content\$(viewFilePath)"
+            DestinationFiles="$(MSBuildProjectDirectory)\$(viewFilePath)"
+            SkipUnchangedFiles="true" />
+		<Copy
+            SourceFiles="$(MSBuildThisFileDirectory)..\content\$(originalViewFilePath)"
+            DestinationFiles="$(MSBuildProjectDirectory)\$(originalViewFilePath)"
+            SkipUnchangedFiles="true" />
+		<Copy
+            SourceFiles="$(MSBuildThisFileDirectory)..\content\$(readmeFilePath)"
+            DestinationFiles="$(MSBuildProjectDirectory)\$(readmeFilePath)"
             SkipUnchangedFiles="true" />
 	</Target>
 
 	<Target Name="CleanPackageAssets" BeforeTargets="Clean">
-		<ItemGroup>
-			<PackageConfig Include="$(MSBuildProjectDirectory)\App_Config\Modules\SXA.Theme.Optimizations\SXA.Theme.Optimizations.config" />
-			<PackageView Include="$(MSBuildProjectDirectory)\Views\SxaLayout\SxaLayout.cshtml" />
-			<PackageViewOriginal Include="$(MSBuildProjectDirectory)\Views\SxaLayout\SxaLayout.cshtml.original" />
-			<Readme Include="$(MSBuildProjectDirectory)\sitecore modules\Web\SXAThemeOptimizations\README.md" />
-		</ItemGroup>
-		
-		<Message Text="Cleaning stale SXA.Theme.Optimizations package files..."  Importance="high" />
-		
-		<Delete Files="@(PackageConfig)"  />
-		<Delete Files="@(PackageView)"  />
-		<Delete Files="@(PackageViewOriginal)"  />
-		<Delete Files="@(Readme)"  />
+		<Message Text="SXA.Theme.Optimizations: Removing stale NuGet package files. Rebuild or build project to copy updated files."  Importance="high" />
+
+		<Delete Files="$(MSBuildProjectDirectory)\$(configFilePath)" />
+		<Delete Files="$(MSBuildProjectDirectory)\$(coreDatItemsFilePath)" />
+		<Delete Files="$(MSBuildProjectDirectory)\$(masterDatItemsFilePath)" />
+		<Delete Files="$(MSBuildProjectDirectory)\$(viewFilePath)" />
+		<Delete Files="$(MSBuildProjectDirectory)\$(originalViewFilePath)" />
+		<Delete Files="$(MSBuildProjectDirectory)\$(readmeFilePath)" />
 	</Target>
 </Project>
