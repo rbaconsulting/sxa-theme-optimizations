@@ -12,7 +12,7 @@ SharedFields:
   Value: 
 - ID: "8e40ab40-8c83-4ff7-9d33-38ed9458de1e"
   Hint: Icon
-  Value: Office/32x32/server_client_exchange.png
+  Value: office/32x32/server_from_client.png
 - ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
   Hint: __Workflow
   Value: 
@@ -37,7 +37,7 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "17d4863d-d1a2-4e5e-9467-cbc229e855c1"
+      Value: "bb24ad79-5d87-4abb-9f92-f11ead87f632"
     - ID: "a47cd065-c361-4332-b22b-7e2148de06f4"
       Hint: Tooltip
       Value: Generate optimized files for all themes on the CD server
@@ -50,4 +50,4 @@ Languages:
       Value: Generate Scripts Remote
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230418T163641Z
+      Value: 20230927T213827Z
