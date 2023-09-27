@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		LICENSE = LICENSE
 		nuget.config = nuget.config
+		sitecore.json = sitecore.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{E9D063AD-BEE8-4094-9731-C25E6241EE16}"
@@ -32,6 +33,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEM
 		.github\ISSUE_TEMPLATE\feature_request.md = .github\ISSUE_TEMPLATE\feature_request.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".config", ".config", "{D512DA1E-B0FB-4D41-B540-4430EAA3026A}"
+	ProjectSection(SolutionItems) = preProject
+		.config\dotnet-tools.json = .config\dotnet-tools.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +56,7 @@ Global
 		{E9D063AD-BEE8-4094-9731-C25E6241EE16} = {B76ADCC2-F8C1-4EE8-AF71-E33E8EEBF748}
 		{BF0C6224-2CEC-469C-8E3E-83467A13BDD8} = {E9D063AD-BEE8-4094-9731-C25E6241EE16}
 		{A92F1C9D-383E-4BAC-8D75-F56A7221047F} = {E9D063AD-BEE8-4094-9731-C25E6241EE16}
+		{D512DA1E-B0FB-4D41-B540-4430EAA3026A} = {B76ADCC2-F8C1-4EE8-AF71-E33E8EEBF748}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D1797526-7F28-4D03-B667-845374D84560}
