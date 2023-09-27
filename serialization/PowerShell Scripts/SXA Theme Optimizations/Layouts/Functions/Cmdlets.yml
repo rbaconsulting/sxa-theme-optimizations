@@ -1,0 +1,23 @@
+﻿---
+ID: "9967efc0-2edf-4e46-98a8-5520ad11cd20"
+Parent: "9577715d-03ff-4899-8ef4-c28701c6665f"
+Template: "ab154d3d-1126-4ab4-ac21-8b86e6bd70ea"
+Path: /sitecore/system/Modules/PowerShell/Script Library/SXA Theme Optimizations/Layouts/Functions/Cmdlets
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160623T110952Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "a9b48755-0724-40ac-9bc8-7b0ff73ca396"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\Admin
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20230927T190147Z
