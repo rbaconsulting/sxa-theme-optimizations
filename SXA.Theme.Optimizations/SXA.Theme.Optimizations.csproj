@@ -9,18 +9,19 @@
 		<Company>RBA Inc.</Company>
 		<Authors>Austin Gilbert</Authors>
 		<PackageProjectUrl>https://github.com/rbaconsulting/SXA-Theme-Optimizations/wiki</PackageProjectUrl>
-		<PackageTags>Sitecore;SXA;Themes;Optimization;Performance;</PackageTags>
+		<PackageTags>Sitecore;SXA;Themes;Optimization;Performance;Creative;Exchange;JavaScript;CSS;</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Description>A small plugin that further optimizes the JavaScript and CSS used by SXA.</Description>
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageReleaseNotes>Please visit our github releases page for release notes. https://github.com/rbaconsulting/SXA-Theme-Optimizations/releases</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	</PropertyGroup>
 	<ItemGroup>
 		<Content Include="App_Config\Modules\SXA.Theme.Optimizations\SXA.Theme.Optimizations.config" />
+		<Content Include="App_Data\items\**" />
 		<Content Include="sitecore modules\Web\SXAThemeOptimizations\README.md" />
-		<Content Include="Views\SxaLayout\SxaLayout.cshtml" />
-		<Content Include="Views\SxaLayout\SxaLayout.cshtml.original" />
+		<Content Include="Views\SxaLayout\Optimized SxaLayout.cshtml" />
 		<None Include="..\README.md">
 		  <Pack>True</Pack>
 		  <PackagePath>\</PackagePath>
@@ -31,10 +32,10 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Sitecore.Mvc" Version="9.3.0">
+		<PackageReference Include="Sitecore.Mvc" Version="10.3.0">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="Sitecore.XA.Foundation.Theming" Version="9.3.0">
+		<PackageReference Include="Sitecore.XA.Foundation.Theming" Version="10.3.0">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 	</ItemGroup>

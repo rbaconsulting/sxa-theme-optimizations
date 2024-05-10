@@ -1,0 +1,15 @@
+{
+  "namespace": "SXA.Theme.Optimizations.Master",
+  "items": {
+    "includes": [
+      {
+        "name": "Layout",
+        "path": "/sitecore/layout/Layouts/Modules/SXA Theme Optimizations"
+      },
+      {
+        "name": "PowerShell Scripts",
+        "path": "/sitecore/system/Modules/PowerShell/Script Library/SXA Theme Optimizations"
+      }
+    ]
+  }
+}
