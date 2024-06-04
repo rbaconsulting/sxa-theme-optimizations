@@ -12,9 +12,9 @@
 name: "CodeQL"
 on:
   push:
-    branches: [ "main", "refs/tags/**" ]
+    branches: [ "main", "v*", "refs/tags/**" ]
   pull_request:
-    branches: [ "main", "refs/tags/**" ]
+    branches: [ "main", "v*", "refs/tags/**" ]
   schedule:
     - cron: '20 2 * * 5'
 
