@@ -8,19 +8,19 @@ using System.Linq;
 using Sitecore.Diagnostics;
 using System.Web;
 using Sitecore.Data;
-using System.Collections.Generic;
+using SXA.Theme.Optimizations.Extensions;
 
 namespace SXA.Theme.Optimizations.Services
 {
-	public class ScriptOptimizer : IScriptOptimizer
-	{
-		public void OptimizeScriptsForAllThemes(Database database)
-		{
-            if(database != null)
+    public class ScriptOptimizer : IScriptOptimizer
+    {
+        public void OptimizeScriptsForAllThemes(Database database)
+        {
+            if (database != null)
             {
                 var themesFolder = database.GetItem(ItemPaths.ThemesFolder);
 
-                if(themesFolder != null)
+                if (themesFolder != null)
                 {
                     foreach (var theme in themesFolder.Axes.GetDescendants().Where(d => d.TemplateID.Equals(Templates.Theme.ID)))
                     {
@@ -36,12 +36,12 @@ namespace SXA.Theme.Optimizations.Services
         public void OptimizeScriptsForTheme(Item targetThemeItem)
         {
             try
-			{
+            {
                 if (targetThemeItem != null)
-				{
+                {
                     var newlyOptimizedMin = string.Empty;
 
-                    var myThemeList = GetThemeWithBaseThemes(targetThemeItem);
+                    var myThemeList = targetThemeItem.GetThemeWithBaseThemes();
 
                     foreach (var themeItem in myThemeList)
                     {
@@ -74,78 +74,55 @@ namespace SXA.Theme.Optimizations.Services
                         }
                     }
 
-                    var themeName = targetThemeItem.Name?.ToLower() ?? string.Empty;
-                    var targetDatabaseName = targetThemeItem.Database?.Name?.ToLower() ?? string.Empty;
-
-					if (!string.IsNullOrWhiteSpace(newlyOptimizedMin) && !string.IsNullOrWhiteSpace(themeName) && !string.IsNullOrWhiteSpace(targetDatabaseName))
+                    try
                     {
-                        var filename = $"{HttpRuntime.AppDomainAppPath}{string.Format(FileNames.NewlyOptimizedMin.TrimStart('/').Replace("/", "\\"), themeName.Replace(" ", "-"), targetDatabaseName)}";
-                        File.WriteAllText(filename, newlyOptimizedMin);
-						Log.Warn(string.Format(LogMessages.Warn.ScriptOptimization, targetThemeItem.Name), this);
-					}
-                    else
+                        var themeName = targetThemeItem.Name?.ToLower() ?? string.Empty;
+                        var targetDatabaseName = targetThemeItem.Database?.Name?.ToLower() ?? string.Empty;
+                        if (!string.IsNullOrWhiteSpace(newlyOptimizedMin) && !string.IsNullOrWhiteSpace(themeName) && !string.IsNullOrWhiteSpace(targetDatabaseName))
+                        {
+                            var filename = $"{HttpRuntime.AppDomainAppPath.TrimEnd('/')}{string.Format(FileNames.NewlyOptimizedMin, themeName.Replace(" ", "-"), targetDatabaseName)}";
+                            File.WriteAllText(filename, newlyOptimizedMin);
+                            Log.Warn(string.Format(LogMessages.Warn.ScriptOptimization, themeName, targetDatabaseName), this);
+                        }
+                        else
+                        {
+                            Log.Error(string.Format(LogMessages.Error.ScriptOptimizationEmptyValue, themeName, targetDatabaseName), this);
+                        }
+                    }
+                    catch (IOException)
                     {
-						Log.Error(string.Format(LogMessages.Error.ScriptOptimizationEmptyValue, themeName, targetDatabaseName), this);
-					}
+                        //the file is unavailable because it is still being written to by another instance/thread with the same data
+                    }
                 }
                 else
                 {
-					Log.Warn(LogMessages.Warn.NullThemeItem, this);
-				}
-			}
-			catch (Exception e)
-			{
-                Log.Error(string.Format(LogMessages.Error.ScriptOptimization, e.Message), e, this);
-			}
-		}
-
-        /// <summary>
-        /// Gets all base themes and the base themes of the base themes... in the proper order with the theme item provided at the end of the list.
-        /// </summary>
-        /// <param name="themeItem"></param>
-        /// <returns></returns>
-        private List<Item> GetThemeWithBaseThemes(Item themeItem)
-        {
-            var list = new List<Item>();
-
-            //This is the line that is different from SXA's OOTB GetThemeWithBaseThemes(). Without it, only base themes directly linked are pulled and not base themes of base themes.
-            var baseThemesFieldId = themeItem.TemplateID == Templates.BaseTheme.ID ? Templates.BaseTheme.Fields.BaseLayout : Templates.Theme.Fields.BaseLayout;
-
-            foreach (var item in ((MultilistField)themeItem.Fields[baseThemesFieldId]).GetItems())
+                    Log.Warn(LogMessages.Warn.NullThemeItem, this);
+                }
+            }
+            catch (Exception e)
             {
-                foreach (var theme in GetThemeWithBaseThemes(item))
+                Log.Error(string.Format(LogMessages.Error.ScriptOptimization, e.Message), e, this);
+            }
+        }
+
+
+
+        private string ConcatenateScript(Item fileItem, string newlyOptimizedMin)
+        {
+            FileField scriptField = fileItem.Fields[Templates.File.Fields.Blob];
+            Stream myBlobStream = scriptField.InnerField.GetBlobStream();
+
+            using (StreamReader reader = new StreamReader(myBlobStream))
+            {
+                var script = reader.ReadToEnd();
+
+                if (!string.IsNullOrWhiteSpace(script) && !newlyOptimizedMin.Contains(script))
                 {
-                    if (!list.Any(t => t.ID == theme.ID))
-                    {
-                        list.Add(theme);
-                    }
+                    newlyOptimizedMin += script + ";\n\n";
                 }
             }
 
-            if (!list.Any(t => t.ID == themeItem.ID))
-            {
-                list.Add(themeItem);
-            }
-
-            return list;
+            return newlyOptimizedMin;
         }
-
-        private string ConcatenateScript(Item fileItem, string newlyOptimizedMin)
-		{
-			FileField scriptField = fileItem.Fields[Templates.File.Fields.Blob];
-			Stream myBlobStream = scriptField.InnerField.GetBlobStream();
-
-			using (StreamReader reader = new StreamReader(myBlobStream))
-			{
-				var script = reader.ReadToEnd();
-
-				if (!string.IsNullOrWhiteSpace(script) && !newlyOptimizedMin.Contains(script))
-				{
-                    newlyOptimizedMin += script + ";\n\n";
-				}
-			}
-
-			return newlyOptimizedMin;
-		}
-	}
+    }
 }

@@ -4,6 +4,9 @@
 		<RootNamespace>SXA.Theme.Optimizations</RootNamespace>
 		<AssemblyName>SXA.Theme.Optimizations</AssemblyName>
 		<Configurations>Debug;Release;</Configurations>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+
+		<!-- Nuget Package Properties -->
 		<RepositoryUrl>https://github.com/rbaconsulting/SXA-Theme-Optimizations</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<Company>RBA Inc.</Company>
@@ -15,7 +18,6 @@
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageReleaseNotes>Please visit our github releases page for release notes. https://github.com/rbaconsulting/SXA-Theme-Optimizations/releases</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	</PropertyGroup>
 	<ItemGroup>
 		<Content Include="App_Config\Modules\SXA.Theme.Optimizations\SXA.Theme.Optimizations.config" />
@@ -23,8 +25,9 @@
 		<Content Include="sitecore modules\Web\SXAThemeOptimizations\README.md" />
 		<Content Include="Views\SxaLayout\Optimized SxaLayout.cshtml" />
 		<None Include="..\README.md">
-		  <Pack>True</Pack>
-		  <PackagePath>\</PackagePath>
+			<Visible>false</Visible>
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
 		</None>
 		<None Include="SXA.Theme.Optimizations.targets">
 			<Pack>true</Pack>
