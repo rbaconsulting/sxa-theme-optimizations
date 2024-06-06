@@ -80,7 +80,7 @@ namespace SXA.Theme.Optimizations.Services
                         var targetDatabaseName = targetThemeItem.Database?.Name?.ToLower() ?? string.Empty;
                         if (!string.IsNullOrWhiteSpace(newlyOptimizedMin) && !string.IsNullOrWhiteSpace(themeName) && !string.IsNullOrWhiteSpace(targetDatabaseName))
                         {
-                            var filename = $"{HttpRuntime.AppDomainAppPath.TrimEnd('/')}{string.Format(FileNames.NewlyOptimizedMin, themeName.Replace(" ", "-"), targetDatabaseName)}";
+                            var filename = $"{HttpRuntime.AppDomainAppPath.TrimEnd('\\')}{string.Format(FileNames.NewlyOptimizedMin, themeName.Replace(" ", "-"), targetDatabaseName)}";
                             File.WriteAllText(filename, newlyOptimizedMin);
                             Log.Warn(string.Format(LogMessages.Warn.ScriptOptimization, themeName, targetDatabaseName), this);
                         }

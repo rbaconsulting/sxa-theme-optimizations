@@ -9,6 +9,14 @@
       {
         "name": "PowerShell Scripts",
         "path": "/sitecore/system/Modules/PowerShell/Script Library/SXA Theme Optimizations"
+      },
+      {
+        "name": "Templates",
+        "path": "/sitecore/templates/Modules/SXA Theme Optimizations"
+      },
+      {
+        "name": "Settings",
+        "path": "/sitecore/system/Settings/SXA Theme Optimizations"
       }
     ]
   }

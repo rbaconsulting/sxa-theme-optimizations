@@ -7,6 +7,18 @@ namespace SXA.Theme.Optimizations.Constants
     /// </summary>
     public readonly struct Templates
     {
+        public readonly struct ThemeOptimizationSettings
+        {
+            public static readonly ID ID = new ID("{DF8A0FAE-6E6E-40D6-B4E2-D723E36DA3EF}");
+
+            public readonly struct Fields
+            {
+                public static readonly ID RenderScriptsAs = new ID("{D5936AA4-F92E-4328-BF7C-625BB727D48C}");
+                public static readonly ID ScriptsLocation = new ID("{C4AFAB2F-101A-4A13-9062-C0B8806C6685}");
+                public static readonly ID DeferCSS = new ID("{22042BB0-7978-43A9-BA2A-F130DC8045D0}");
+            }
+        }
+
         public readonly struct Settings
         {
             public static readonly ID ID = new ID("{4E81145F-6C8F-46D7-B239-998EC24C8EF1}");

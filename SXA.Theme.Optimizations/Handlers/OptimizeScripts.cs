@@ -5,6 +5,7 @@ using Sitecore.DependencyInjection;
 using Sitecore.Events;
 using SXA.Theme.Optimizations.Constants;
 using SXA.Theme.Optimizations.Interfaces;
+using SXA.Theme.Optimizations.Services;
 using System;
 using System.Text.RegularExpressions;
 using static SXA.Theme.Optimizations.Constants.Templates;
@@ -27,10 +28,10 @@ namespace SXA.Theme.Optimizations.Handlers
         public void OnSaving(object sender, EventArgs args)
         {
 
-            if (Settings.GetBoolSetting(SitecoreSettings.DevelopmentMode, false) && args != null)
+            if (args != null)
             {
                 var savedItem = Event.ExtractParameter(args, 0) as Item;
-                if (savedItem != null && savedItem.Database.Name.Equals(Databases.Master, StringComparison.OrdinalIgnoreCase))
+                if (Settings.GetBoolSetting(SitecoreSettings.DevelopmentMode, false) && savedItem?.Database.Name.Equals(Databases.Master, StringComparison.OrdinalIgnoreCase) == true)
                 {
                     var itemPath = savedItem.Paths?.FullPath ?? string.Empty;
                     if (itemPath.StartsWith(ItemPaths.ThemesFolder) || itemPath.StartsWith(ItemPaths.BaseThemesFolder) || itemPath.StartsWith(ItemPaths.ExtensionThemesFolder))
@@ -41,6 +42,19 @@ namespace SXA.Theme.Optimizations.Handlers
                         }
                     }
                 }
+
+                if (savedItem?.TemplateID == ThemeOptimizationSettings.ID)
+                {
+                    CachingService.ClearCache();
+                }
+            }
+        }
+
+        public void OnPublishEnd(object sender, EventArgs args)
+        {
+            if (args != null)
+            {
+                CachingService.ClearCache();
             }
         }
 
