@@ -1,0 +1,67 @@
+﻿---
+ID: "6fe904a6-bf14-4b05-9ba6-e63f1e961ff5"
+Parent: "9967efc0-2edf-4e46-98a8-5520ad11cd20"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/SXA Theme Optimizations/Layouts/Functions/Cmdlets/Get-Confirmation"
+SharedFields:
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    function Get-Confirmation {
+        [CmdletBinding()]
+        param(
+            [Parameter(Mandatory = $true, Position = 0 )]
+            [Item]$tenantItem,
+            [Parameter(Mandatory = $true, Position = 1 )]
+            [bool]$optimize
+        )
+    
+        begin {
+            Write-Verbose "Cmdlet Get-Confirmation - Begin"
+        }
+    
+        process {
+            Write-Verbose "Cmdlet Get-Confirmation - Process"
+            $confirmationMessage = ""
+            if($optimize) {
+                $confirmationMessage += "Are you sure you want to set optimized page layouts?"
+            }
+            else {
+                $confirmationMessage += "Are you sure you want to set default SXA page layouts?"
+            }
+            
+            $confirmationMessage += "`n`n"
+            $confirmationMessage += "This script will change the shared layout within the '__Standard Values' of any project level template based off of SXA's base 'Page' template. All pages for all SXA sites underneath this tenant will be effected."
+            $confirmationMessage += "`n`n"
+            $confirmationMessage += "Do you want to continue?"
+            
+            if ((Show-Confirm -Title $confirmationMessage) -eq "yes") {
+                $true
+            }
+            else {
+                $false
+            }
+        }
+    
+        end {
+            Write-Verbose "Cmdlet Get-Confirmation - End"
+        }
+    }
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170829T065259Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "8ce9cc66-0765-4da6-88ff-7e59bf64269f"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\Admin
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20230927T224455Z

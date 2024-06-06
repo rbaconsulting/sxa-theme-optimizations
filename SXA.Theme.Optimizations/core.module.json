@@ -1,0 +1,17 @@
+{
+  "namespace": "SXA.Theme.Optimizations.Core",
+  "items": {
+    "includes": [
+      {
+        "name": "Ribbon Chunks",
+        "path": "/sitecore/content/Applications/Content Editor/Ribbons/Chunks/Theme Optimization",
+        "database": "core"
+      },
+      {
+        "name": "Ribbon Strip",
+        "path": "/sitecore/content/Applications/Content Editor/Ribbons/Strips/Developer/Theme Optimization",
+        "database": "core"
+      }
+    ]
+  }
+}

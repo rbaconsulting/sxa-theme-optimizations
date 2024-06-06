@@ -1,0 +1,49 @@
+﻿---
+ID: "34b8701e-5f2b-4ade-aa91-309b989ed789"
+Parent: "9967efc0-2edf-4e46-98a8-5520ad11cd20"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/SXA Theme Optimizations/Layouts/Functions/Cmdlets/Get-TenantPageTemplatesStandardValues"
+SharedFields:
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    function Get-TenantPageTemplatesStandardValues {
+        [CmdletBinding()]
+        param(
+            [Parameter(Mandatory = $true, Position = 0 )]
+            [Item]$tenantItem
+        )
+    
+        $pageTemplateStandardValues = New-Object 'System.Collections.Generic.HashSet[Item]'
+        
+        $templatesLocation = $tenantItem["Templates"]
+        $templates = Get-Item -Path "master:" -ID $templatesLocation
+        $templates.Children | ForEach-Object {
+            #SXA Page template = {3F8A6A5D-7B1A-4566-8CD4-0A50F3030BD8} or /sitecore/templates/Foundation/Experience Accelerator/Multisite/Content/Page
+            if(Test-BaseTemplate -Item $_ -Template "{3F8A6A5D-7B1A-4566-8CD4-0A50F3030BD8}") {
+                $standardValues = $_.Children | Where-Object -Property Name -eq "__Standard Values" | Select-Object -First 1
+                
+                $pageTemplateStandardValues.Add($standardValues)
+            }
+        }
+        
+        return $pageTemplateStandardValues
+    }
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170829T065259Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "0e06820d-f2ca-40e6-bc97-6b967294d909"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\Admin
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20230927T211854Z

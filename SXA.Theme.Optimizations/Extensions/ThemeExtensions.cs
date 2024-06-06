@@ -1,53 +1,44 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Sitecore.Configuration;
-using Sitecore.DependencyInjection;
-using Sitecore.XA.Foundation.Theming;
-using SXA.Theme.Optimizations.Constants;
-using System.IO;
-using System.Web;
+﻿using Sitecore.Data.Fields;
+using System.Collections.Generic;
+using Sitecore.Data.Items;
+using System.Linq;
+using Templates = SXA.Theme.Optimizations.Constants.Templates;
 
 namespace SXA.Theme.Optimizations.Extensions
 {
     public static class ThemeExtensions
     {
         /// <summary>
-        /// Returns the script src for SXA's Theme Optimization script.
+        /// Gets all base themes and the base themes of the base themes... in the proper order with the theme item provided at the end of the list.
         /// </summary>
-        /// <returns>A string for a html script tag's src attribute.</returns>
-        public static string GetSXAThemeOptimizationsScript()
+        /// <param name="themeItem"></param>
+        /// <returns></returns>
+        public static List<Item> GetThemeWithBaseThemes(this Item themeItem)
         {
-            var scriptUrl = GetWebModulesPath();
-
-            if (Settings.GetBoolSetting(SitecoreSettings.AlwaysAppendRevision, false))
+            var list = new List<Item>();
+            if (themeItem?.TemplateID == Templates.BaseTheme.ID || themeItem?.TemplateID == Templates.Theme.ID)
             {
-                var updatedDate = File.GetLastWriteTimeUtc(GetFullFileSystemPath());
+                //This is the line that is different from SXA's OOTB GetThemeWithBaseThemes(). Without it, only base themes directly linked are pulled and not base themes of base themes.
+                var baseThemesFieldId = themeItem.TemplateID == Templates.BaseTheme.ID ? Templates.BaseTheme.Fields.BaseLayout : Templates.Theme.Fields.BaseLayout;
 
-                scriptUrl = $"{scriptUrl}?rev={updatedDate:MMddHHmmss}";
+                foreach (var item in ((MultilistField)themeItem.Fields[baseThemesFieldId]).GetItems())
+                {
+                    foreach (var theme in GetThemeWithBaseThemes(item))
+                    {
+                        if (!list.Any(t => t.ID == theme.ID))
+                        {
+                            list.Add(theme);
+                        }
+                    }
+                }
+
+                if (!list.Any(t => t.ID == themeItem.ID))
+                {
+                    list.Add(themeItem);
+                }
             }
 
-            if (Settings.GetBoolSetting(SitecoreSettings.AlwaysIncludeServerUrl, false))
-            {
-                scriptUrl = Settings.GetSetting(SitecoreSettings.MediaLinkServerUrl, string.Empty) + scriptUrl;
-            }
-
-            return scriptUrl;
-        }
-
-        public static string GetWebModulesPath()
-        {
-            var themingContext = ServiceLocator.ServiceProvider.GetService<IThemingContext>();
-
-            var themeName = themingContext?.ThemeItem?.Name?.Replace(" ", "-").ToLower() ?? string.Empty;
-            var databaseName = themingContext?.ThemeItem?.Database?.Name?.ToLower() ?? string.Empty;
-
-            return string.Format(FileNames.NewlyOptimizedMin, themeName, databaseName) ?? string.Empty;
-        }
-
-        public static string GetFullFileSystemPath()
-        {
-            var scriptPath = GetWebModulesPath()?.TrimStart('/').Replace("/", "\\") ?? string.Empty;
-
-            return $"{HttpRuntime.AppDomainAppPath}{scriptPath}" ?? string.Empty;
+            return list;
         }
     }
 }
