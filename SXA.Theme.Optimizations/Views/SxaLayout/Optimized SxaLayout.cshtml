@@ -9,12 +9,16 @@
 @using Sitecore.XA.Foundation.Theming.Configuration
 @using Microsoft.Extensions.DependencyInjection
 @using Sitecore.DependencyInjection
-@using SXA.Theme.Optimizations.Extensions
+@using SXA.Theme.Optimizations.Services
+@using SXA.Theme.Optimizations.Enums
 @model Sitecore.Mvc.Presentation.RenderingModel
 @{
     var assetConfiguration = AssetConfigurationReader.Read();
     var assetLinks = AssetLinksGenerator.GenerateLinks(new ThemesProvider());
     var includes = ServiceLocator.ServiceProvider.GetService<IHTMLIncludesService>().GetHTMLIncludes();
+
+    var themeOptimizationSettings = CachingService.GetThemeOptimizationsSettings();
+    var scriptsRenderAttribute = themeOptimizationSettings.RenderScriptsAs == ScriptAttributes.Async ? "async" : themeOptimizationSettings.RenderScriptsAs == ScriptAttributes.Defer ? "defer" : string.Empty;
 }
 
 <!DOCTYPE html>
@@ -25,14 +29,18 @@
 <html class="no-js" lang="@Model.Item.Language.Name">
 <!--<![endif]-->
 <head>
-    @if (!assetConfiguration.RequestAssetsOptimizationDisabled && !Sitecore.Context.PageMode.IsExperienceEditor)
+    @if (!assetConfiguration.RequestAssetsOptimizationDisabled && !Sitecore.Context.PageMode.IsExperienceEditor && themeOptimizationSettings.ScriptsLocation == ScriptLocations.Top)
     {
-        <script async src="@ThemeExtensions.GetSXAThemeOptimizationsScript()"></script>
+        <script @scriptsRenderAttribute src="@themeOptimizationSettings.ScriptUrl"></script>
     }
 
     @foreach (string style in assetLinks.Styles)
     {
-        @Html.Raw(style.Replace("rel=\"stylesheet\"", "rel=\"preload\" as=\"style\""))
+        if (themeOptimizationSettings.DeferCss)
+        {
+            @Html.Raw(style.Replace("rel=\"stylesheet\"", "rel=\"preload\" as=\"style\""))
+        }
+
         @Html.Raw(style)
     }
 
@@ -61,11 +69,18 @@
         @Html.Raw(include.HTML)
     }
 
-    @if (assetConfiguration.RequestAssetsOptimizationDisabled || Sitecore.Context.PageMode.IsExperienceEditor)
+    @if (themeOptimizationSettings.ScriptsLocation == ScriptLocations.Bottom || assetConfiguration.RequestAssetsOptimizationDisabled || Sitecore.Context.PageMode.IsExperienceEditor)
     {
-        foreach (string include in assetLinks.Scripts)
+        if (assetConfiguration.RequestAssetsOptimizationDisabled || Sitecore.Context.PageMode.IsExperienceEditor)
         {
-            @Html.Raw(include)
+            foreach (string include in assetLinks.Scripts)
+            {
+                @Html.Raw(include)
+            }
+        }
+        else if (themeOptimizationSettings.ScriptsLocation == ScriptLocations.Bottom)
+        {
+            <script @scriptsRenderAttribute src="@themeOptimizationSettings.ScriptUrl"></script>
         }
     }
 
