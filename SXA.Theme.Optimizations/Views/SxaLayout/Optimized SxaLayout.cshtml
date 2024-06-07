@@ -69,19 +69,16 @@
         @Html.Raw(include.HTML)
     }
 
-    @if (themeOptimizationSettings.ScriptsLocation == ScriptLocations.Bottom || assetConfiguration.RequestAssetsOptimizationDisabled || Sitecore.Context.PageMode.IsExperienceEditor)
+    @if (assetConfiguration.RequestAssetsOptimizationDisabled || Sitecore.Context.PageMode.IsExperienceEditor)
     {
-        if (assetConfiguration.RequestAssetsOptimizationDisabled || Sitecore.Context.PageMode.IsExperienceEditor)
+        foreach (string include in assetLinks.Scripts)
         {
-            foreach (string include in assetLinks.Scripts)
-            {
-                @Html.Raw(include)
-            }
+            @Html.Raw(include)
         }
-        else if (themeOptimizationSettings.ScriptsLocation == ScriptLocations.Bottom)
-        {
-            <script @scriptsRenderAttribute src="@themeOptimizationSettings.ScriptUrl"></script>
-        }
+    }
+    else if (themeOptimizationSettings.ScriptsLocation == ScriptLocations.Bottom)
+    {
+        <script @scriptsRenderAttribute src="@themeOptimizationSettings.ScriptUrl"></script>
     }
 
     <!-- /#wrapper -->
