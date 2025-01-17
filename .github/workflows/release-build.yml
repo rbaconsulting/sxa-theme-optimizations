@@ -47,6 +47,9 @@ jobs:
     - name: Generate Master database items file
       run: dotnet sitecore itemres create -i SXA.Theme.Optimizations.Master --output SXA.Theme.Optimizations\App_Data\items\master\sxa.theme.optimizations --overwrite
 
+    - name: Generate Web database items file
+      run: dotnet sitecore itemres create -i SXA.Theme.Optimizations.Web --output SXA.Theme.Optimizations\App_Data\items\web\sxa.theme.optimizations --overwrite
+
     - name: Build Solution
       run: dotnet build SXA.Theme.Optimizations/SXA.Theme.Optimizations.csproj -c Release
 

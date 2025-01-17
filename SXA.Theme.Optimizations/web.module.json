@@ -1,0 +1,27 @@
+{
+  "namespace": "SXA.Theme.Optimizations.Web",
+  "items": {
+    "includes": [
+      {
+        "name": "Layout",
+        "path": "/sitecore/layout/Layouts/Modules/SXA Theme Optimizations",
+        "database": "web"
+      },
+      {
+        "name": "PowerShell Scripts",
+        "path": "/sitecore/system/Modules/PowerShell/Script Library/SXA Theme Optimizations",
+        "database": "web"
+      },
+      {
+        "name": "Templates",
+        "path": "/sitecore/templates/Modules/SXA Theme Optimizations",
+        "database": "web"
+      },
+      {
+        "name": "Settings",
+        "path": "/sitecore/system/Settings/SXA Theme Optimizations",
+        "database": "web"
+      }
+    ]
+  }
+}
