@@ -35,12 +35,14 @@ namespace SXA.Theme.Optimizations.Models
             if (!string.IsNullOrWhiteSpace(themeItem?.Name) && !string.IsNullOrWhiteSpace(themeItem?.Database?.Name))
             {
                 var alwaysIncludeServerUrl = Settings.GetBoolSetting(SitecoreSettings.AlwaysIncludeServerUrl, false);
-                var scriptUrlBase = alwaysIncludeServerUrl ? Settings.GetSetting(SitecoreSettings.MediaLinkServerUrl, string.Empty) : string.Empty;
-
-                var scriptUrl = $"{scriptUrlBase}{string.Format(FileNames.NewlyOptimizedMin, themeItem.Name.Replace(" ", "-").ToLower(), themeItem.Database.Name.ToLower())}";
-
                 var alwaysAppednRevision = Settings.GetBoolSetting(SitecoreSettings.AlwaysAppendRevision, false);
-                ScriptUrl = alwaysAppednRevision ? $"{scriptUrl}?rev={File.GetLastWriteTimeUtc(scriptUrl):MMddHHmmss}" : scriptUrl;
+                var mediaLinkServerUrl = Settings.GetSetting(SitecoreSettings.MediaLinkServerUrl, string.Empty);
+
+                var scriptUrlBase = alwaysIncludeServerUrl ? mediaLinkServerUrl : string.Empty;
+                var scriptUrlFilePathAndName = string.Format(FileNames.NewlyOptimizedMin, themeItem.Name.Replace(" ", "-").ToLower(), themeItem.Database.Name.ToLower());
+                var scriptUrlRevision = alwaysAppednRevision ? $"{scriptUrlFilePathAndName}?rev={File.GetLastWriteTimeUtc(scriptUrlFilePathAndName):MMddHHmmss}" : string.Empty;
+
+                ScriptUrl = Path.Combine(scriptUrlBase, scriptUrlFilePathAndName, scriptUrlRevision);
             }
         }
     }
