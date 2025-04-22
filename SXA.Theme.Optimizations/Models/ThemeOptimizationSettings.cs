@@ -6,6 +6,7 @@ using SXA.Theme.Optimizations.Enums;
 using System;
 using System.IO;
 using System.Linq;
+using System.Web;
 using Templates = SXA.Theme.Optimizations.Constants.Templates;
 
 namespace SXA.Theme.Optimizations.Models
@@ -38,11 +39,19 @@ namespace SXA.Theme.Optimizations.Models
                 var alwaysAppednRevision = Settings.GetBoolSetting(SitecoreSettings.AlwaysAppendRevision, false);
                 var mediaLinkServerUrl = Settings.GetSetting(SitecoreSettings.MediaLinkServerUrl, string.Empty);
 
-                var scriptUrlBase = alwaysIncludeServerUrl ? mediaLinkServerUrl : string.Empty;
                 var scriptUrlFilePathAndName = string.Format(FileNames.NewlyOptimizedMin, themeItem.Name.Replace(" ", "-").ToLower(), themeItem.Database.Name.ToLower());
-                var scriptUrlRevision = alwaysAppednRevision ? $"{scriptUrlFilePathAndName}?rev={File.GetLastWriteTimeUtc(scriptUrlFilePathAndName):MMddHHmmss}" : string.Empty;
 
-                ScriptUrl = Path.Combine(scriptUrlBase, scriptUrlFilePathAndName, scriptUrlRevision);
+                var lastWriteTime = DateTime.MinValue;
+                if (!string.IsNullOrWhiteSpace(HttpRuntime.AppDomainAppPath))
+                {
+                    var serverFilePath = new FileInfo($"{new DirectoryInfo(HttpRuntime.AppDomainAppPath).FullName}{scriptUrlFilePathAndName}")?.FullName ?? string.Empty;
+
+                    lastWriteTime = !string.IsNullOrWhiteSpace(serverFilePath) ? File.GetLastWriteTimeUtc(serverFilePath) : DateTime.MinValue;
+                }
+
+                var scriptUrlRevision = alwaysAppednRevision ? $"{scriptUrlFilePathAndName}?rev={lastWriteTime:MMddHHmmss}" : string.Empty;
+
+                ScriptUrl = Path.Combine(alwaysIncludeServerUrl ? mediaLinkServerUrl : string.Empty, scriptUrlFilePathAndName, scriptUrlRevision);
             }
         }
     }
