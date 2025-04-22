@@ -27,7 +27,6 @@ namespace SXA.Theme.Optimizations.Handlers
         /// <param name="args"></param>
         public void OnSaving(object sender, EventArgs args)
         {
-
             if (args != null)
             {
                 var savedItem = Event.ExtractParameter(args, 0) as Item;
@@ -70,6 +69,8 @@ namespace SXA.Theme.Optimizations.Handlers
             {
                 themeBundler.OptimizeScriptsForAllThemes(Factory.GetDatabase(Databases.Master));
                 themeBundler.OptimizeScriptsForAllThemes(Factory.GetDatabase(Databases.Web));
+
+                CachingService.ClearCache();
             }
         }
 
@@ -84,6 +85,8 @@ namespace SXA.Theme.Optimizations.Handlers
             if (themeBundler != null)
             {
                 themeBundler.OptimizeScriptsForAllThemes(Factory.GetDatabase(Databases.Web));
+
+                CachingService.ClearCache();
             }
         }
     }
