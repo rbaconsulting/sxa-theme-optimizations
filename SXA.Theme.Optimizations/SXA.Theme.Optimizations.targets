@@ -1,10 +1,11 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
 		<configFilePath>App_Config\Modules\SXA.Theme.Optimizations\SXA.Theme.Optimizations.config</configFilePath>
-		<coreDatItemsFilePath>App_Data\items\core\items.core.sxa.theme.optimizations.dat</coreDatItemsFilePath>
-		<masterDatItemsFilePath>App_Data\items\master\items.master.sxa.theme.optimizations.dat</masterDatItemsFilePath>
-		<viewFilePath>Views\SxaLayout\Optimized SxaLayout.cshtml</viewFilePath>
+		<coreDatItemsFilePath>sitecore modules\items\core\items.core.sxa.theme.optimizations.dat</coreDatItemsFilePath>
+		<masterDatItemsFilePath>sitecore modules\items\master\items.master.sxa.theme.optimizations.dat</masterDatItemsFilePath>
+		<webDatItemsFilePath>sitecore modules\items\web\items.web.sxa.theme.optimizations.dat</webDatItemsFilePath>
 		<readmeFilePath>sitecore modules\Web\SXAThemeOptimizations\README.md</readmeFilePath>
+		<viewFilePath>Views\SxaLayout\Optimized SxaLayout.cshtml</viewFilePath>
 	</PropertyGroup>
 	<Target Name="CopyPackageAssets" BeforeTargets="BeforeBuild">
 		<Message Text="SXA.Theme.Optimizations: Copying NuGet package files into project directory."  Importance="high" />
@@ -22,12 +23,16 @@
             DestinationFiles="$(MSBuildProjectDirectory)\$(masterDatItemsFilePath)"
             SkipUnchangedFiles="true" />
 		<Copy
-            SourceFiles="$(MSBuildThisFileDirectory)..\content\$(viewFilePath)"
-            DestinationFiles="$(MSBuildProjectDirectory)\$(viewFilePath)"
+            SourceFiles="$(MSBuildThisFileDirectory)..\content\$(webDatItemsFilePath)"
+            DestinationFiles="$(MSBuildProjectDirectory)\$(webDatItemsFilePath)"
             SkipUnchangedFiles="true" />
 		<Copy
             SourceFiles="$(MSBuildThisFileDirectory)..\content\$(readmeFilePath)"
             DestinationFiles="$(MSBuildProjectDirectory)\$(readmeFilePath)"
+            SkipUnchangedFiles="true" />
+		<Copy
+            SourceFiles="$(MSBuildThisFileDirectory)..\content\$(viewFilePath)"
+            DestinationFiles="$(MSBuildProjectDirectory)\$(viewFilePath)"
             SkipUnchangedFiles="true" />
 	</Target>
 
@@ -37,7 +42,8 @@
 		<Delete Files="$(MSBuildProjectDirectory)\$(configFilePath)" />
 		<Delete Files="$(MSBuildProjectDirectory)\$(coreDatItemsFilePath)" />
 		<Delete Files="$(MSBuildProjectDirectory)\$(masterDatItemsFilePath)" />
-		<Delete Files="$(MSBuildProjectDirectory)\$(viewFilePath)" />
+		<Delete Files="$(MSBuildProjectDirectory)\$(webDatItemsFilePath)" />
 		<Delete Files="$(MSBuildProjectDirectory)\$(readmeFilePath)" />
+		<Delete Files="$(MSBuildProjectDirectory)\$(viewFilePath)" />
 	</Target>
 </Project>
