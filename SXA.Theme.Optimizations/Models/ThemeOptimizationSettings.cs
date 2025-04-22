@@ -39,19 +39,19 @@ namespace SXA.Theme.Optimizations.Models
                 var alwaysAppednRevision = Settings.GetBoolSetting(SitecoreSettings.AlwaysAppendRevision, false);
                 var mediaLinkServerUrl = Settings.GetSetting(SitecoreSettings.MediaLinkServerUrl, string.Empty);
 
-                var scriptUrlFilePathAndName = string.Format(FileNames.NewlyOptimizedMin, themeItem.Name.Replace(" ", "-").ToLower(), themeItem.Database.Name.ToLower());
+                var scriptFilePathAndName = string.Format(FileNames.NewlyOptimizedMin, themeItem.Name.Replace(" ", "-").ToLower(), themeItem.Database.Name.ToLower());
 
                 var lastWriteTime = DateTime.MinValue;
                 if (!string.IsNullOrWhiteSpace(HttpRuntime.AppDomainAppPath))
                 {
-                    var serverFilePath = new FileInfo($"{new DirectoryInfo(HttpRuntime.AppDomainAppPath).FullName}{scriptUrlFilePathAndName}")?.FullName ?? string.Empty;
+                    var serverFilePath = new FileInfo($"{HttpRuntime.AppDomainAppPath.TrimEnd('\\')}{scriptFilePathAndName}")?.FullName ?? string.Empty;
 
                     lastWriteTime = !string.IsNullOrWhiteSpace(serverFilePath) ? File.GetLastWriteTimeUtc(serverFilePath) : DateTime.MinValue;
                 }
 
-                var scriptUrlRevision = alwaysAppednRevision ? $"{scriptUrlFilePathAndName}?rev={lastWriteTime:MMddHHmmss}" : string.Empty;
+                scriptFilePathAndName = alwaysAppednRevision ? $"{scriptFilePathAndName}?rev={lastWriteTime:MMddHHmmss}" : string.Empty;
 
-                ScriptUrl = Path.Combine(alwaysIncludeServerUrl ? mediaLinkServerUrl : string.Empty, scriptUrlFilePathAndName, scriptUrlRevision);
+                ScriptUrl = alwaysIncludeServerUrl ? $"{mediaLinkServerUrl}{scriptFilePathAndName}" : scriptFilePathAndName;
             }
         }
     }
