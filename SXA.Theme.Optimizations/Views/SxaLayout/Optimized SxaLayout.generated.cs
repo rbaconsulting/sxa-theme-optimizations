@@ -142,27 +142,21 @@ namespace SXA.Theme.Optimizations
             
             #line default
             #line hidden
-WriteLiteral(@"
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class=""no-js lt-ie9 lt-ie8 lt-ie7""> <![endif]-->
-<!--[if IE 7]>         <html class=""no-js lt-ie9 lt-ie8""> <![endif]-->
-<!--[if IE 8]>         <html class=""no-js lt-ie9""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class=""no-js"" lang=""");
+WriteLiteral("\r\n<!DOCTYPE html>\r\n<html class=\"no-js\" lang=\"");
 
 
             
-            #line 29 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 25 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
                      Write(Model.Item.Language.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("\">\r\n<!--<![endif]-->\r\n<head>\r\n");
+WriteLiteral("\">\r\n<head>\r\n");
 
 
             
-            #line 32 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 27 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
      if (!assetConfiguration.RequestAssetsOptimizationDisabled && !Sitecore.Context.PageMode.IsExperienceEditor && themeOptimizationSettings.ScriptsLocation == ScriptLocations.Top)
     {
 
@@ -173,7 +167,7 @@ WriteLiteral("        <script ");
 
 
             
-            #line 34 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 29 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
            Write(scriptsRenderAttribute);
 
             
@@ -183,7 +177,7 @@ WriteLiteral(" src=\"");
 
 
             
-            #line 34 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 29 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
                                         Write(themeOptimizationSettings.ScriptUrl);
 
             
@@ -193,7 +187,7 @@ WriteLiteral("\"></script>\r\n");
 
 
             
-            #line 35 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 30 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
     }
 
             
@@ -203,7 +197,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 37 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 32 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
      foreach (string style in assetLinks.Styles)
     {
         if (themeOptimizationSettings.DeferCss)
@@ -213,14 +207,14 @@ WriteLiteral("\r\n");
             #line default
             #line hidden
             
-            #line 41 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 36 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
        Write(Html.Raw(style.Replace("rel=\"stylesheet\"", "rel=\"preload\" as=\"style\"")));
 
             
             #line default
             #line hidden
             
-            #line 41 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 36 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
                                                                                           
         }
 
@@ -229,14 +223,14 @@ WriteLiteral("\r\n");
             #line default
             #line hidden
             
-            #line 44 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 39 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
    Write(Html.Raw(style));
 
             
             #line default
             #line hidden
             
-            #line 44 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 39 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
                         
     }
 
@@ -247,7 +241,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 47 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 42 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
      foreach (var include in includes.Head)
     {
         
@@ -255,14 +249,14 @@ WriteLiteral("\r\n");
             #line default
             #line hidden
             
-            #line 49 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 44 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
    Write(Html.Raw(include.HTML));
 
             
             #line default
             #line hidden
             
-            #line 49 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 44 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
                                
     }
 
@@ -273,7 +267,7 @@ WriteLiteral("\r\n    ");
 
 
             
-            #line 52 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 47 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
 Write(Html.Sxa().VisitorIdentification());
 
             
@@ -283,7 +277,7 @@ WriteLiteral("\r\n    ");
 
 
             
-            #line 53 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 48 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
 Write(Html.Sxa().Placeholder("head"));
 
             
@@ -293,7 +287,7 @@ WriteLiteral("\r\n</head>\r\n<body ");
 
 
             
-            #line 55 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 50 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
  Write(Html.Sxa().Body().Decorate());
 
             
@@ -303,7 +297,7 @@ WriteLiteral(">\r\n    ");
 
 
             
-            #line 56 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 51 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
 Write(Html.Sitecore().Placeholder("body-top"));
 
             
@@ -313,7 +307,7 @@ WriteLiteral("\r\n\r\n");
 
 
             
-            #line 58 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 53 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
      foreach (var include in includes.BodyTop)
     {
         
@@ -321,14 +315,14 @@ WriteLiteral("\r\n\r\n");
             #line default
             #line hidden
             
-            #line 60 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 55 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
    Write(Html.Raw(include.HTML));
 
             
             #line default
             #line hidden
             
-            #line 60 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 55 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
                                
     }
 
@@ -339,7 +333,7 @@ WriteLiteral("\r\n    ");
 
 
             
-            #line 63 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 58 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
 Write(Html.Sxa().GridBody());
 
             
@@ -349,7 +343,7 @@ WriteLiteral("\r\n\r\n    ");
 
 
             
-            #line 65 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 60 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
 Write(Html.Sitecore().Placeholder("body-bottom"));
 
             
@@ -359,7 +353,7 @@ WriteLiteral("\r\n\r\n");
 
 
             
-            #line 67 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 62 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
      foreach (var include in includes.BodyBottom)
     {
         
@@ -367,14 +361,14 @@ WriteLiteral("\r\n\r\n");
             #line default
             #line hidden
             
-            #line 69 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 64 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
    Write(Html.Raw(include.HTML));
 
             
             #line default
             #line hidden
             
-            #line 69 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 64 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
                                
     }
 
@@ -385,7 +379,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 72 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 67 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
      if (assetConfiguration.RequestAssetsOptimizationDisabled || Sitecore.Context.PageMode.IsExperienceEditor)
     {
         foreach (string include in assetLinks.Scripts)
@@ -395,14 +389,14 @@ WriteLiteral("\r\n");
             #line default
             #line hidden
             
-            #line 76 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 71 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
        Write(Html.Raw(include));
 
             
             #line default
             #line hidden
             
-            #line 76 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 71 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
                               
         }
     }
@@ -416,7 +410,7 @@ WriteLiteral("        <script ");
 
 
             
-            #line 81 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 76 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
            Write(scriptsRenderAttribute);
 
             
@@ -426,7 +420,7 @@ WriteLiteral(" src=\"");
 
 
             
-            #line 81 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 76 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
                                         Write(themeOptimizationSettings.ScriptUrl);
 
             
@@ -436,13 +430,13 @@ WriteLiteral("\"></script>\r\n");
 
 
             
-            #line 82 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
+            #line 77 "..\..\Views\SxaLayout\Optimized SxaLayout.cshtml"
     }
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n    <!-- /#wrapper -->\r\n</body>\r\n</html>");
+WriteLiteral("</body>\r\n</html>");
 
 
         }
