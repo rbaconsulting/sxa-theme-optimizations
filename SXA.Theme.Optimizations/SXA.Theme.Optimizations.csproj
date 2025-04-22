@@ -21,10 +21,21 @@
 		<PackageIcon>logo.png</PackageIcon>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="Sitecore.Mvc" Version="10.4.0" />
+		<PackageReference Include="Sitecore.XA.Foundation.Theming" Version="10.4.0" />
+		<PackageReference Include="Sitecore.XA.Foundation.Grid" Version="10.4.0" />
+
+		<PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.4" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="RazorGenerator.Mvc" Version="2.4.9" />
+		<PackageReference Include="WebActivatorEx" Version="2.0.3" />
+	</ItemGroup>
+	<ItemGroup>
 		<Content Include="App_Config\Modules\SXA.Theme.Optimizations\SXA.Theme.Optimizations.config" />
 		<Content Include="App_Data\items\**" />
 		<Content Include="sitecore modules\Web\SXAThemeOptimizations\README.md" />
-		<Content Include="Views\SxaLayout\Optimized SxaLayout.cshtml" />
+
 		<None Include="..\README.md">
 			<Visible>false</Visible>
 			<Pack>True</Pack>
@@ -34,20 +45,19 @@
 			<Pack>true</Pack>
 			<PackagePath>buildTransitive</PackagePath>
 		</None>
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-		<PackageReference Include="Sitecore.Mvc" Version="10.4.0">
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="Sitecore.XA.Foundation.Theming" Version="10.4.0">
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-	</ItemGroup>
-	<ItemGroup>
-	  <None Update="logo.png">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
+		<None Update="logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+
+		<Content Include="Views\SxaLayout\Optimized SxaLayout.cshtml">
+			<Generator>RazorGenerator</Generator>
+			<LastGenOutput>Optimized SxaLayout.generated.cs</LastGenOutput>
+		</Content>
+		<Compile Update="Views\SxaLayout\Optimized SxaLayout.generated.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Optimized SxaLayout.cshtml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 </Project>
