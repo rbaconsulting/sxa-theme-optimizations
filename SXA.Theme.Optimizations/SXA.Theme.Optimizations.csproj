@@ -33,7 +33,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Content Include="App_Config\Modules\SXA.Theme.Optimizations\SXA.Theme.Optimizations.config" />
-		<Content Include="App_Data\items\**" />
+		<Content Include="sitecore modules\items\**" />
 		<Content Include="sitecore modules\Web\SXAThemeOptimizations\README.md" />
 
 		<None Include="..\README.md">

@@ -41,11 +41,17 @@ jobs:
     - name: Restore Sitecore.CLI packages and files
       run: dotnet sitecore init
 
-    - name: Generate Core database items file
-      run: dotnet sitecore itemres create -i SXA.Theme.Optimizations.Core --output SXA.Theme.Optimizations\App_Data\items\core\sxa.theme.optimizations --overwrite
+    - name: Generate Core database .dat items file
+      run: dotnet sitecore itemres create -i SXA.Theme.Optimizations.Core --output "SXA.Theme.Optimizations\sitecore modules\items\core\sxa.theme.optimizations" --overwrite
 
-    - name: Generate Master database items file
-      run: dotnet sitecore itemres create -i SXA.Theme.Optimizations.Master --output SXA.Theme.Optimizations\App_Data\items\master\sxa.theme.optimizations --overwrite
+    - name: Generate Master database .dat items file
+      run: dotnet sitecore itemres create -i SXA.Theme.Optimizations.Master --output "SXA.Theme.Optimizations\sitecore modules\items\master\sxa.theme.optimizations" --overwrite
+
+    - name: Generate Web database .dat items file
+      run: dotnet sitecore itemres create -i SXA.Theme.Optimizations.Master --output "SXA.Theme.Optimizations\sitecore modules\items\web\sxa.theme.optimizations" --overwrite
+
+    - name: Rename Web database .dat items file 
+      run: mv "SXA.Theme.Optimizations/sitecore modules/items/web/items.master.sxa.theme.optimizations.dat" "SXA.Theme.Optimizations/sitecore modules/items/web/items.web.sxa.theme.optimizations.dat"
 
     - name: Build Solution
       run: dotnet build SXA.Theme.Optimizations/SXA.Theme.Optimizations.csproj -c Release
